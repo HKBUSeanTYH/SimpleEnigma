@@ -5,7 +5,7 @@
 class CipherMap {
     public:
         //optionally convert an input to its plugged equivalent
-        virtual void forward(int) = 0;
+        virtual int map(int) = 0;
         virtual ~CipherMap() {}
     private:
         //init to setup default indices of plugboard
