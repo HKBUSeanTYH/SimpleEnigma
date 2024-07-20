@@ -8,7 +8,7 @@ class Enigma {
     public:
         //member initializer to init plugboard
         Enigma() : plugboard() {}
-        void input_plugs(std::istream&);
+        void input_plugs(std::string);
         std::string encipher();
     private:
         Plugboard plugboard;

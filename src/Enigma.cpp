@@ -1,8 +1,7 @@
 #include "Enigma.h"
 
-void Enigma::input_plugs(std::istream& inputStream) {
-    std::string input;
-    getline(inputStream, input);
+void Enigma::input_plugs(std::string input) {
+
 }
 
 std::string Enigma::encipher() {
