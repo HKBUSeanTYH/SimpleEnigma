@@ -7,6 +7,7 @@ class Plugboard : public CipherMap{
     public:
         //process user assigned plugs
         void process_plugged_characters(std::string);
+        int map(int) override;
         ~Plugboard() {}
     private:
         //convert a char to its int representation 0-25

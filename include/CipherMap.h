@@ -7,7 +7,7 @@ class CipherMap {
         //optionally convert an input to its plugged equivalent
         virtual int map(int) = 0;
         virtual ~CipherMap() {}
-    private:
+    protected:
         //init to setup default indices of plugboard
         void default_wiring();
         //declare array alternatively use pointer if dynamic array size needed

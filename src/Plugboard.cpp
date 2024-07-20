@@ -1,6 +1,6 @@
 #include "Plugboard.h"
 
-int Plugboard::CipherMap::map(int idx) {
+int Plugboard::map(int idx) {
     return ciphermapping[idx];
 }
 
