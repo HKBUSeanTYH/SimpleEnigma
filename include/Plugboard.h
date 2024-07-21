@@ -1,12 +1,13 @@
 #ifndef PLUGBOARD_DEF
 #define PLUGBOARD_DEF
-#include <string>
+#include <tuple>
+#include <stdexcept>
 #include "CipherMap.h"
 
 class Plugboard : public CipherMap{
     public:
         //process user assigned plugs
-        void process_plugged_characters(std::string);
+        void process_plugged_characters(std::tuple<char,char>);
         int map(int) override;
         //plugboard constructor that initializes the default wiring for plugboard
         Plugboard() { default_wiring(); }

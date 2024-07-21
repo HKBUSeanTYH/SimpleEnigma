@@ -9,7 +9,7 @@ class Enigma {
         //member initializer to init plugboard
         Enigma() : plugboard() {}
         void input_plugs(std::string);
-        std::string encipher();
+        std::string encipher(std::string);
     private:
         Plugboard plugboard;
 };
