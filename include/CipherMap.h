@@ -1,6 +1,6 @@
 #ifndef CIPHERMAP_DEF
 #define CIPHERMAP_DEF
-#include <iterator>
+#include <array>
 
 class CipherMap {
     public:
@@ -10,7 +10,6 @@ class CipherMap {
     protected:
         //init to setup default indices of plugboard
         void default_wiring();
-        //declare array alternatively use pointer if dynamic array size needed
-        int ciphermapping[26];
+        std::array<int, 26> ciphermapping;
 };
 #endif
