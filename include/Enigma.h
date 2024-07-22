@@ -10,6 +10,7 @@ class Enigma {
         Enigma() : plugboard() {}
         void input_plugs(std::string);
         std::string encipher(std::string);
+        void print_state();
     private:
         Plugboard plugboard;
 };

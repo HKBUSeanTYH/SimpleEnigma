@@ -2,4 +2,5 @@
 
 int main() {
     Enigma enigma {};
+    enigma.print_state();
 }

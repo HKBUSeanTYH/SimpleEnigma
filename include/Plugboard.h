@@ -2,6 +2,7 @@
 #define PLUGBOARD_DEF
 #include <tuple>
 #include <stdexcept>
+#include <iostream>
 #include "CipherMap.h"
 
 class Plugboard : public CipherMap{
@@ -9,6 +10,7 @@ class Plugboard : public CipherMap{
         //process user assigned plugs
         void process_plugged_characters(std::tuple<char,char>);
         int map(int) override;
+        void print_state();
         //plugboard constructor that initializes the default wiring for plugboard
         Plugboard() { default_wiring(); }
         ~Plugboard() {}
