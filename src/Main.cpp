@@ -2,5 +2,4 @@
 
 int main() {
     Enigma enigma {};
-    
 }
