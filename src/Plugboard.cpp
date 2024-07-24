@@ -23,10 +23,10 @@ void Plugboard::print_state() {
     for (int idx = 0; idx < ciphermapping.size(); ++idx) {
         int map_val = ciphermapping[idx];
         if (map_val != idx) {
-            char idx = int_to_char(idx);
-            char val = int_to_char(map_val);
+            char cIdx = int_to_char(idx);
+            char cVal = int_to_char(map_val);
             
-            std::cout << idx << " is mapped to " << val << "\n";
+            std::cout << idx << " is mapped to " << cVal << "\n";
         }
     }
 }

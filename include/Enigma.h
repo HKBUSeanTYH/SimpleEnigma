@@ -2,7 +2,9 @@
 #define ENIGMA_DEF
 #include <iostream>
 #include <string>
+#include <vector>
 #include "Plugboard.h"
+#include "StringUtil.h"
 
 class Enigma {
     public:
