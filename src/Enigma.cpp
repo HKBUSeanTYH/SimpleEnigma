@@ -1,6 +1,7 @@
 #include "Enigma.h"
 
 void Enigma::input_plugs(std::string input) {
+    std::transform(input.begin(), input.end(), input.begin(), [](auto c) { return std::toupper(c); });
     std::vector<std::string> mappings = split(input, " ");
     std::vector<std::string> temp;
     for (auto& map : mappings) {

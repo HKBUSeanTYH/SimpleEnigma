@@ -26,7 +26,7 @@ void Plugboard::print_state() {
             char cIdx = int_to_char(idx);
             char cVal = int_to_char(map_val);
             
-            std::cout << idx << " is mapped to " << cVal << "\n";
+            std::cout << cIdx << " is mapped to " << cVal << "\n";
         }
     }
 }
