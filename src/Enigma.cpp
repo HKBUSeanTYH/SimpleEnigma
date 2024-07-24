@@ -5,7 +5,7 @@ void Enigma::input_plugs(std::string input) {
     std::vector<std::string> mappings = split(input, " ");
     std::vector<std::string> temp;
     for (auto& map : mappings) {
-        split(temp, map, ":");
+        split_into(temp, map, ":");
         plugboard.process_plugged_characters({temp[0][0], temp[1][0]});
     }
 }

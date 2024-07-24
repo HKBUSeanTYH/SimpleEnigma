@@ -13,7 +13,7 @@ std::vector<std::string> split (std::string input, std::string delimiter) {
     return output;
 }
 
-void split (std::vector<std::string>& vector, std::string input, std::string delimiter) {
+void split_into (std::vector<std::string>& vector, std::string input, std::string delimiter) {
     vector.clear();
     size_t start {0}, end {0}, delim_len {delimiter.size()};
     std::string token;
