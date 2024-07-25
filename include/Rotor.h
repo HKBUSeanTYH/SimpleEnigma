@@ -8,7 +8,6 @@ class Rotor : public CipherMap {
         
         int map(int) override;
         int inverse_map(int);
-        void step_rotor();
         //default constructor
         Rotor(int input = 0) : notch_pos(input) { 
             default_wiring(this->ciphermapping); 

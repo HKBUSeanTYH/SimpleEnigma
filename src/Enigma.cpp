@@ -6,7 +6,11 @@ void Enigma::input_plugs(std::string input) {
     std::vector<std::string> temp;
     for (auto& map : mappings) {
         StringUtil::split_into(temp, map, ":");
-        plugboard.process_plugged_characters({temp[0][0], temp[1][0]});
+        if (temp[0].length() == 1 && temp[1].length() == 1) {
+            plugboard.process_plugged_characters({temp[0][0], temp[1][0]});
+        } else {
+            std::cout << "Invalid mapping: " << temp[0] << " to " << temp[1] <<"\n";
+        }        
     }
 }
 
