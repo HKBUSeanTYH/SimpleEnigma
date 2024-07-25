@@ -12,7 +12,7 @@ void Plugboard::process_plugged_characters(std::tuple<char,char> input) {
     }
 }
 
-char int_to_char(int i) {
+char Plugboard::int_to_char(int i) {
     if (i < 0 || i > 25) {
         throw std::invalid_argument("Invalid int. Accepts 0 - 25");
     }

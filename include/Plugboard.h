@@ -17,5 +17,6 @@ class Plugboard : public CipherMap{
     private:
         //convert a char to its int representation 0-25
         int char_to_int(char);
+        char int_to_char(int i);
 };
 #endif
