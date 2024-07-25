@@ -1,6 +1,6 @@
 #include "StringUtil.h"
 
-std::vector<std::string> split (std::string input, std::string delimiter) {
+std::vector<std::string> StringUtil::split (std::string input, std::string delimiter) {
     std::vector<std::string> output;
     size_t start {0}, end {0}, delim_len {delimiter.size()};
     std::string token;
@@ -13,7 +13,7 @@ std::vector<std::string> split (std::string input, std::string delimiter) {
     return output;
 }
 
-void split_into (std::vector<std::string>& vector, std::string input, std::string delimiter) {
+void StringUtil::split_into (std::vector<std::string>& vector, std::string input, std::string delimiter) {
     vector.clear();
     size_t start {0}, end {0}, delim_len {delimiter.size()};
     std::string token;

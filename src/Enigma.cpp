@@ -2,10 +2,10 @@
 
 void Enigma::input_plugs(std::string input) {
     std::transform(input.begin(), input.end(), input.begin(), [](auto c) { return std::toupper(c); });
-    std::vector<std::string> mappings = split(input, " ");
+    std::vector<std::string> mappings = StringUtil::split(input, " ");
     std::vector<std::string> temp;
     for (auto& map : mappings) {
-        split_into(temp, map, ":");
+        StringUtil::split_into(temp, map, ":");
         plugboard.process_plugged_characters({temp[0][0], temp[1][0]});
     }
 }

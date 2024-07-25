@@ -12,13 +12,6 @@ void Plugboard::process_plugged_characters(std::tuple<char,char> input) {
     }
 }
 
-char Plugboard::int_to_char(int i) {
-    if (i < 0 || i > 25) {
-        throw std::invalid_argument("Invalid int. Accepts 0 - 25");
-    }
-    return static_cast<char>(i + 65);
-}
-
 void Plugboard::print_state() {
     for (int idx = 0; idx < ciphermapping.size(); ++idx) {
         int map_val = ciphermapping[idx];
@@ -33,11 +26,4 @@ void Plugboard::print_state() {
 
 int Plugboard::map(int idx) {
     return ciphermapping[idx];
-}
-
-int Plugboard::char_to_int(char c) {
-    if (c < 'A' || c > 'Z') {
-        throw std::invalid_argument("Invalid char. Only accepts alphabets");
-    }
-    return static_cast<int>(c) - 65;
 }
