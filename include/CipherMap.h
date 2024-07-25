@@ -4,12 +4,12 @@
 #include <stdexcept>
 
 class CipherMap {
-    public:
+    protected:
         //optionally convert an input to its plugged equivalent
         virtual int map(int) = 0;
         virtual void insert_mapping(char, char) = 0;
         virtual ~CipherMap() {}
-    protected:
+
         //init to setup default indices of plugboard
         void default_wiring(std::array<int, 26>&);
         std::array<int, 26> ciphermapping;
