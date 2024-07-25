@@ -1,8 +1,6 @@
 #include "Plugboard.h"
 
-void Plugboard::process_plugged_characters(std::tuple<char,char> input) {
-    int left = char_to_int(std::get<0>(input));
-    int right = char_to_int(std::get<1>(input));
+void Plugboard::process_plugged_characters(char left, char right) {
     //if both are unplugged
     if (ciphermapping[left] == left && ciphermapping[right] == right) {
         ciphermapping[left] = right;
