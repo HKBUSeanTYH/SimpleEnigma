@@ -7,6 +7,7 @@ class CipherMap {
     public:
         //optionally convert an input to its plugged equivalent
         virtual int map(int) = 0;
+        virtual void insert_mapping(char, char) = 0;
         virtual ~CipherMap() {}
     protected:
         //init to setup default indices of plugboard

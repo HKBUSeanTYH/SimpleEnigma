@@ -1,6 +1,8 @@
 #include "Plugboard.h"
 
-void Plugboard::process_plugged_characters(char left, char right) {
+void Plugboard::insert_mapping(char k, char v) {
+    int left = char_to_int(k);
+    int right = char_to_int(v);
     //if both are unplugged
     if (ciphermapping[left] == left && ciphermapping[right] == right) {
         ciphermapping[left] = right;
