@@ -15,7 +15,7 @@ class CipherMap {
         std::array<int, 26> ciphermapping;
 
         //convert a char to its int representation 0-25 and vice versa
-        int char_to_int(char);
-        char int_to_char(int);
+        static int char_to_int(char);
+        static char int_to_char(int);
 };
 #endif
