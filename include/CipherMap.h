@@ -11,7 +11,7 @@ class CipherMap {
         virtual ~CipherMap() {}
 
         //init to setup default indices of plugboard
-        void default_wiring(std::array<int, 26>&);
+        static void default_wiring(std::array<int, 26>&);
         std::array<int, 26> ciphermapping;
 
         //convert a char to its int representation 0-25 and vice versa
