@@ -16,17 +16,17 @@ void Plugboard::insert_mapping(char k, char v) {
     int left = char_to_int(k);
     int right = char_to_int(v);
     //if both are unplugged
-    if (this->ciphermapping[left] == left && this->ciphermapping[right] == right) {
-        this->ciphermapping[left] = right;
-        this->ciphermapping[right] = left;
+    if (this->cipher_mapping[left] == left && this->cipher_mapping[right] == right) {
+        this->cipher_mapping[left] = right;
+        this->cipher_mapping[right] = left;
     } else {
         throw std::invalid_argument("Invalid plug mapping. Plug has already been mapped.");
     }
 }
 
 void Plugboard::print_state() {
-    for (int idx = 0; idx < this->ciphermapping.size(); ++idx) {
-        int map_val = this->ciphermapping[idx];
+    for (int idx = 0; idx < this->cipher_mapping.size(); ++idx) {
+        int map_val = this->cipher_mapping[idx];
         if (map_val != idx) {
             char cIdx = int_to_char(idx);
             char cVal = int_to_char(map_val);
@@ -37,5 +37,5 @@ void Plugboard::print_state() {
 }
 
 int Plugboard::map(int idx) {
-    return this->ciphermapping[idx];
+    return this->cipher_mapping[idx];
 }

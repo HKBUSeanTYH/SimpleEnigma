@@ -11,17 +11,19 @@ class Rotor : public CipherMap {
         bool is_at_notch();
         void turn_over();
 
-        Rotor(int notch = 0, int rotor = 0) : notch_pos(notch), rotor_pos(rotor) { 
-            default_wiring(this->ciphermapping); 
-            compute_inverse(this->ciphermapping, this->inverseMapping); 
+        static Rotor create_rotor(std::string path);
+        Rotor(int notch = 0, int rotor = 0, int ring = 0) : notch_pos(notch), rotor_pos(rotor), ring_setting(ring) { 
+            default_wiring(this->cipher_mapping); 
+            compute_inverse(this->cipher_mapping, this->inverse_mapping); 
         }
         ~Rotor() {}
     private:
         const int notch_pos;
+        int ring_setting;
         int rotor_pos;
 
-        int handle_rotor_shift(int);
+        int encipher(int, int, int, std::array<int,26>&);
         static void compute_inverse(std::array<int,26>&, std::array<int,26>&);
-        std::array<int, 26> inverseMapping;
+        std::array<int, 26> inverse_mapping;
 };
 #endif

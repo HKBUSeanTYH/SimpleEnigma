@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "Plugboard.h"
+#include "Rotor.h"
 #include "StringUtil.h"
 
 class Enigma {
@@ -15,5 +16,6 @@ class Enigma {
         void print_state();
     private:
         Plugboard plugboard;
+        std::array<Rotor, 3> rotors;
 };
 #endif

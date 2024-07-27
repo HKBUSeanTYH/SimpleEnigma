@@ -12,7 +12,7 @@ class Plugboard : public CipherMap{
         int map(int) override;
         void print_state();
         //plugboard constructor that initializes the default wiring for plugboard
-        Plugboard() { default_wiring(this->ciphermapping); }
+        Plugboard() { default_wiring(this->cipher_mapping); }
         ~Plugboard() {}
     private:
         void insert_mapping(char, char) override;
