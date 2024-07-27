@@ -1,6 +1,8 @@
 #ifndef CIPHERMAP_DEF
 #define CIPHERMAP_DEF
 #include <array>
+#include <vector>
+#include <string>
 #include <stdexcept>
 
 class CipherMap {
@@ -8,6 +10,7 @@ class CipherMap {
         //optionally convert an input to its plugged equivalent
         virtual int map(int) = 0;
         virtual void insert_mapping(char, char) = 0;
+        virtual void process_mappings(std::vector<std::string>) = 0;
         virtual ~CipherMap() {}
 
         //init to setup default indices of plugboard

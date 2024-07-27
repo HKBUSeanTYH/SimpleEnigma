@@ -1,20 +1,32 @@
 #include "Plugboard.h"
 
+void Plugboard::process_mappings(std::vector<std::string> mappings) {
+    std::vector<std::string> temp;
+    for (auto& map : mappings) {
+        StringUtil::split_into(temp, map, ":");
+        if (temp[0].length() == 1 && temp[1].length() == 1) {
+            insert_mapping(temp[0][0], temp[1][0]);
+        } else {
+            std::cout << "Invalid mapping: " << temp[0] << " to " << temp[1] <<"\n";
+        }        
+    }
+}
+
 void Plugboard::insert_mapping(char k, char v) {
     int left = char_to_int(k);
     int right = char_to_int(v);
     //if both are unplugged
-    if (ciphermapping[left] == left && ciphermapping[right] == right) {
-        ciphermapping[left] = right;
-        ciphermapping[right] = left;
+    if (this->ciphermapping[left] == left && this->ciphermapping[right] == right) {
+        this->ciphermapping[left] = right;
+        this->ciphermapping[right] = left;
     } else {
         throw std::invalid_argument("Invalid plug mapping. Plug has already been mapped.");
     }
 }
 
 void Plugboard::print_state() {
-    for (int idx = 0; idx < ciphermapping.size(); ++idx) {
-        int map_val = ciphermapping[idx];
+    for (int idx = 0; idx < this->ciphermapping.size(); ++idx) {
+        int map_val = this->ciphermapping[idx];
         if (map_val != idx) {
             char cIdx = int_to_char(idx);
             char cVal = int_to_char(map_val);
@@ -25,5 +37,5 @@ void Plugboard::print_state() {
 }
 
 int Plugboard::map(int idx) {
-    return ciphermapping[idx];
+    return this->ciphermapping[idx];
 }

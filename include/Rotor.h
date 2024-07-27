@@ -3,19 +3,18 @@
 #include "CipherMap.h"
 
 class Rotor : public CipherMap {
-    public:
-        int notch_pos;
-        
+    public:        
         int map(int) override;
         int inverse_map(int);
-        //default constructor
-        Rotor(int input = 0) : notch_pos(input) { 
+        Rotor(int notch = 0, int rotor = 0) : notch_pos(notch), rotor_pos(rotor) { 
             default_wiring(this->ciphermapping); 
-            default_wiring(this->inverseMapping); 
+            compute_inverse(this->ciphermapping, this->inverseMapping); 
         }
         ~Rotor() {}
     private:
-        void compute_inverse_mapping(std::array<int,26>&);
+        int notch_pos;
+        int rotor_pos;
+        static void compute_inverse(std::array<int,26>&, std::array<int,26>&);
         std::array<int, 26> inverseMapping;
 };
 #endif
