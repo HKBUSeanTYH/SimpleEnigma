@@ -4,13 +4,13 @@
 #include <vector>
 #include <string>
 #include <stdexcept>
+#include <iostream>
+#include "StringUtil.h"
 
 class CipherMap {
     protected:
         //optionally convert an input to its plugged equivalent
         virtual int map(int) = 0;
-        virtual void insert_mapping(char, char) = 0;
-        virtual void process_mappings(std::vector<std::string>) = 0;
         virtual ~CipherMap() {}
 
         //init to setup default indices of plugboard
@@ -20,5 +20,7 @@ class CipherMap {
         //convert a char to its int representation 0-25 and vice versa
         static int char_to_int(char);
         static char int_to_char(int);
+        static void insert_mapping(std::array<int, 26>&, char, char);
+        static void process_mappings(std::array<int, 26>&, std::vector<std::string>);
 };
 #endif

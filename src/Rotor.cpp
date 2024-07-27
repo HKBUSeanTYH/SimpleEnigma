@@ -24,6 +24,23 @@ void Rotor::turn_over() {
     this->rotor_pos = (this->rotor_pos + 1) % 26;
 }
 
+Rotor Rotor::create_rotor(std::string filePath) {
+    std::ifstream inFile(filePath);
+    std::string line;
+    int notch_pos;
+    //read notch
+    if (std::getline(inFile, line)) {
+        notch_pos = std::stoi(line);
+    }
+    if (std::getline(inFile, line)) {
+        return Rotor{notch_pos, 0, 0, line};
+    }
+}
+
+void insert_mapping(char k, char v) {
+
+}
+
 int Rotor::encipher(int input, int rotor_pos, int ring_setting, std::array<int,26>& mapping) {
     int shift {rotor_pos - ring_setting};
     /*
