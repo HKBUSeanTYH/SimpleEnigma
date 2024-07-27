@@ -15,15 +15,19 @@ class Rotor : public CipherMap {
         bool is_at_notch();
         void turn_over();
 
+        static void process_mappings(Rotor*, std::vector<std::string>);
+        static void compute_inverse(Rotor*);
+
         static Rotor create_rotor(std::string path);
         Rotor(int notch = 0) : notch_pos(notch), rotor_pos(0), ring_setting(0) { 
             default_wiring(this->cipher_mapping); 
-            compute_inverse(this->cipher_mapping, this->inverse_mapping); 
+            compute_inverse(this); 
         }
 
         Rotor(int notch, int rotor, int ring, std::vector<std::string> mappings) : notch_pos(notch), rotor_pos(rotor), ring_setting(ring) { 
-            process_mappings(this->cipher_mapping, mappings); 
-            compute_inverse(this->cipher_mapping, this->inverse_mapping); 
+            //https://stackoverflow.com/a/445135/16034206 - passing 'this' to a static function inside constructor
+            process_mappings(this, mappings); 
+            compute_inverse(this); 
         }
         ~Rotor() {}
     protected:
@@ -32,8 +36,6 @@ class Rotor : public CipherMap {
         int rotor_pos;
 
         int encipher(int, int, int, std::array<int,26>&);
-        static void process_mappings(std::array<int, 26>&, std::vector<std::string>);
-        static void compute_inverse(std::array<int, 26>&, std::array<int, 26>&);
         std::array<int, 26> inverse_mapping;
 };
 #endif

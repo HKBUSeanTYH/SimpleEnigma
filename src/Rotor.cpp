@@ -59,7 +59,8 @@ int Rotor::encipher(int input, int rotor_pos, int ring_setting, std::array<int,2
     // add another 26 to prevent negatives
 }
 
-void Rotor::process_mappings(std::array<int, 26>& source, std::vector<std::string> mappings) {
+void Rotor::process_mappings(Rotor* rotor, std::vector<std::string> mappings) {
+    std::array<int,26>& source = rotor->cipher_mapping;
     std::vector<std::string> temp;
     for (auto& map : mappings) {
         StringUtil::split_into(temp, map, ":");
@@ -73,7 +74,9 @@ void Rotor::process_mappings(std::array<int, 26>& source, std::vector<std::strin
     }
 }
 
-void Rotor::compute_inverse(std::array<int, 26>& source, std::array<int, 26>& dest) {
+void Rotor::compute_inverse(Rotor* rotor) {
+    std::array<int,26>& source = rotor->cipher_mapping;
+    std::array<int,26>& dest = rotor->inverse_mapping;
     for (int i = 0; i < source.size(); ++i) {
         dest[source[i]] = i; //get the value at index i of source array, treat it as index of inverse, and place source index as value
     }
