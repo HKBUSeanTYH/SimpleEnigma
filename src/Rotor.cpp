@@ -12,6 +12,10 @@ void Rotor::set_rotor_pos(int position) {
     this->rotor_pos = (position % 26);
 }
 
+void Rotor::set_ring_setting(int steps) {
+    this->rotor_pos = steps;
+}
+
 bool Rotor::is_at_notch() {
     return (this->rotor_pos == this->notch_pos);
 }
@@ -23,11 +27,12 @@ void Rotor::turn_over() {
 int Rotor::encipher(int input, int rotor_pos, int ring_setting, std::array<int,26>& mapping) {
     int shift {rotor_pos - ring_setting};
     /*
-        ring setting shifts characters N steps forward. With Ring setting B
+        ring setting shifts characters N steps forward. With Ring setting B, and Rotor 1
         Z is treated as A
         A is treated as B
         etc ...
-        input:A will go through Z wiring
+
+        an input of A will go through Z wiring (Z treated as A), Z mapped to J and shifted to K
     */
     return (mapping[(input + shift + 26) % 26] - shift + 26) % 26;
     // input + shift could be negative, so add 26

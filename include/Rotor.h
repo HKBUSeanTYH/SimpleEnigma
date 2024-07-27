@@ -7,6 +7,7 @@ class Rotor : public CipherMap {
         int map(int) override;
         int inverse_map(int);
 
+        void set_ring_setting(int);
         void set_rotor_pos(int);
         bool is_at_notch();
         void turn_over();
