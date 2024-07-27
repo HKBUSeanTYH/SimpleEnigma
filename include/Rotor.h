@@ -6,7 +6,7 @@
 #include "StringUtil.h"
 
 class Rotor : public CipherMap {
-    public:     
+    public:
         int map(int) override;
         int inverse_map(int);
 
@@ -20,17 +20,17 @@ class Rotor : public CipherMap {
             default_wiring(this->cipher_mapping); 
             compute_inverse(this->cipher_mapping, this->inverse_mapping); 
         }
-        Rotor(int notch, int rotor, int ring, std::string input) : notch_pos(notch), rotor_pos(rotor), ring_setting(ring) { 
-            std::transform(input.begin(), input.end(), input.begin(), [](auto c) { return std::toupper(c); });
-            std::vector<std::string> mappings = StringUtil::split(input, " ");
-            process_mappings(this->cipher_mapping, mappings);
-            compute_inverse(this->cipher_mapping, this->inverse_mapping);
-        }
         ~Rotor() {}
     private:
         const int notch_pos;
         int ring_setting;
         int rotor_pos;
+
+        //private constructor so that only default constructor or static instance-creation method is accessible
+        Rotor(int notch, int rotor, int ring, std::vector<std::string> mappings) : notch_pos(notch), rotor_pos(rotor), ring_setting(ring) { 
+            CipherMap::process_mappings(this->cipher_mapping, mappings);
+            compute_inverse(this->cipher_mapping, this->inverse_mapping);
+        }
 
         int encipher(int, int, int, std::array<int,26>&);
         static void compute_inverse(std::array<int,26>&, std::array<int,26>&);

@@ -31,10 +31,16 @@ Rotor Rotor::create_rotor(std::string filePath) {
     //read notch
     if (std::getline(inFile, line)) {
         notch_pos = std::stoi(line);
+    } else {
+        throw std::invalid_argument("Unable to get notch position");
     }
     if (std::getline(inFile, line)) {
-        return Rotor{notch_pos, 0, 0, line};
+        std::transform(line.begin(), line.end(), line.begin(), [](auto c) { return std::toupper(c); });
+    } else {
+        throw std::invalid_argument("Unable to get mappings");
     }
+    std::vector<std::string> mappings = StringUtil::split(line, " ");
+    return Rotor{notch_pos, 0, 0, mappings};
 }
 
 int Rotor::encipher(int input, int rotor_pos, int ring_setting, std::array<int,26>& mapping) {
@@ -53,7 +59,7 @@ int Rotor::encipher(int input, int rotor_pos, int ring_setting, std::array<int,2
     // add another 26 to prevent negatives
 }
 
-void compute_inverse(std::array<int,26>& source, std::array<int,26>& inverse) {
+void Rotor::compute_inverse(std::array<int,26>& source, std::array<int,26>& inverse) {
     for (int i = 0; i < source.size(); ++i) {
         inverse[source[i]] = i; //get the value at index i of source array, treat it as index of inverse, and place source index as value
     }
