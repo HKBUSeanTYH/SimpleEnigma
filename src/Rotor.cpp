@@ -37,10 +37,6 @@ Rotor Rotor::create_rotor(std::string filePath) {
     }
 }
 
-void insert_mapping(char k, char v) {
-
-}
-
 int Rotor::encipher(int input, int rotor_pos, int ring_setting, std::array<int,26>& mapping) {
     int shift {rotor_pos - ring_setting};
     /*
