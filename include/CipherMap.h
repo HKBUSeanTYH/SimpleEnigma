@@ -13,6 +13,10 @@ class CipherMap {
         virtual int map(int) = 0;
         virtual ~CipherMap() {}
 
+        CipherMap() : cipher_mapping{} {
+            default_wiring(cipher_mapping);
+        }
+
         //init to setup default indices of plugboard
         static void default_wiring(std::array<int, 26>&);
         std::array<int, 26> cipher_mapping;

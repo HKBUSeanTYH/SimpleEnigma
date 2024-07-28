@@ -40,7 +40,7 @@ Rotor Rotor::create_rotor(std::string filePath) {
         throw std::invalid_argument("Unable to get mappings");
     }
     std::vector<std::string> mappings = StringUtil::split(line, " ");
-    return Rotor{notch_pos, 0, 0, mappings};
+    return (mappings.size() == 26) ? Rotor{notch_pos, 0, 0, mappings} : throw std::invalid_argument("Not enough mappings in Rotor file: "+filePath);
 }
 
 int Rotor::encipher(int input, int rotor_pos, int ring_setting, std::array<int,26>& mapping) {

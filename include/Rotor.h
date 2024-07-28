@@ -19,8 +19,7 @@ class Rotor : public CipherMap {
         static void compute_inverse(Rotor*);
 
         static Rotor create_rotor(std::string path);
-        Rotor(int notch = 0) : notch_pos(notch), rotor_pos(0), ring_setting(0) { 
-            default_wiring(this->cipher_mapping); 
+        Rotor(int notch = 0) : notch_pos(notch), rotor_pos(0), ring_setting(0) {
             compute_inverse(this); 
         }
 
