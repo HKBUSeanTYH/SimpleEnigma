@@ -24,6 +24,9 @@ void Rotor::turn_over() {
     this->rotor_pos = (this->rotor_pos + 1) % 26;
 }
 
+/*
+    TODO: look into move semantics. avoid unnecessary copies (even if copy elision may occur).
+*/
 Rotor Rotor::create_rotor(std::string filePath) {
     std::ifstream inFile(filePath);
     std::string line;

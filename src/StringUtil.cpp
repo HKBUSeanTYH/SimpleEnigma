@@ -1,7 +1,7 @@
 #include "StringUtil.h"
 
 /*
-    look into move semantics. avoid unnecessary copies (even if copy elision may occur).
+    TODO: look into move semantics. avoid unnecessary copies (even if copy elision may occur).
 */
 std::vector<std::string> StringUtil::split (std::string input, std::string delimiter) {
     std::vector<std::string> output;
