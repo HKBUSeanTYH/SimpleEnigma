@@ -10,12 +10,17 @@
 class Enigma {
     public:
         //member initializer to init plugboard
-        Enigma(std::array<Rotor, 3> rotorArr) : plugboard(), rotors{rotorArr} {}
+        Enigma(Rotor one, Rotor two, Rotor three) : plugboard(), left{one}, centre{two}, right{three} { }
         void input_plugs(std::string);
         std::string encipher(std::string);
-        void print_state();
+        friend std::ostream& operator<<(std::ostream& o, Enigma const& a) {
+            o << a.plugboard << "\nRotors:\n" << a.left << "\n" << a.centre << "\n" << a.right << "\n";
+            return o;
+        }
     private:
         Plugboard plugboard;
-        std::array<Rotor, 3> rotors;
+        Rotor left;
+        Rotor centre;
+        Rotor right;
 };
 #endif
