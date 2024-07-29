@@ -22,9 +22,8 @@ class Rotor : public CipherMap {
             compute_inverse(this); 
         }
 
-        Rotor(int notch, int rotor, int ring, std::vector<std::string> mappings) : notch_pos(notch), rotor_pos(rotor), ring_setting(ring) { 
+        Rotor(int notch, int rotor, int ring, std::vector<std::string> mappings) : notch_pos(notch), rotor_pos(rotor), ring_setting(ring), CipherMap{mappings} { 
             //https://stackoverflow.com/a/445135/16034206 - passing 'this' to a static function inside constructor
-            CipherMap::process_mappings(this, mappings); 
             compute_inverse(this); 
         }
         ~Rotor() {}

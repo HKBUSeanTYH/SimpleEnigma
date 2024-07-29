@@ -6,7 +6,7 @@
 class Reflector : public CipherMap {
     public:
         int map(int) override;
-        Reflector(std::vector<std::string> mappings) { CipherMap::process_mappings(this, mappings); }
+        Reflector(std::vector<std::string> mappings) : CipherMap{mappings} { }
         static Reflector create_reflector(std::string path);
 
         friend std::ostream& operator<<(std::ostream& o, Reflector const& a) {

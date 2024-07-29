@@ -16,7 +16,9 @@ class CipherMap {
         CipherMap() : cipher_mapping{} {
             default_wiring(cipher_mapping);
         }
-        CipherMap(std::array<int, 26> input) : cipher_mapping{input} { }
+        CipherMap(std::vector<std::string> mappings) { 
+            CipherMap::process_mappings(this, mappings);
+        }
 
         //init to setup default indices of plugboard
         static void default_wiring(std::array<int, 26>&);
