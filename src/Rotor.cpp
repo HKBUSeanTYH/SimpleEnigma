@@ -62,21 +62,6 @@ int Rotor::encipher(int input, int rotor_pos, int ring_setting, std::array<int,2
     // add another 26 to prevent negatives
 }
 
-void Rotor::process_mappings(Rotor* rotor, std::vector<std::string> mappings) {
-    std::array<int,26>& source = rotor->cipher_mapping;
-    std::vector<std::string> temp;
-    for (auto& map : mappings) {
-        StringUtil::split_into(temp, map, ":");
-        if (temp[0].length() == 1 && temp[1].length() == 1) {
-            int left {char_to_int(temp[0][0])};
-            int right {char_to_int(temp[1][0])};
-            source[left] = right;
-        } else {
-            std::cout << "Invalid mapping: " << temp[0] << " to " << temp[1] <<"\n";
-        }        
-    }
-}
-
 void Rotor::compute_inverse(Rotor* rotor) {
     std::array<int,26>& source = rotor->cipher_mapping;
     std::array<int,26>& dest = rotor->inverse_mapping;

@@ -9,7 +9,6 @@ class Plugboard : public CipherMap{
         ~Plugboard() {}
 
         friend std::ostream& operator<<(std::ostream& o, Plugboard const& a) {
-            o << "Plugboard: \n";
             for (int idx = 0; idx < a.cipher_mapping.size(); ++idx) {
                 int map_val = a.cipher_mapping[idx];
                 if (map_val != idx) {

@@ -15,7 +15,6 @@ class Rotor : public CipherMap {
         bool is_at_notch();
         void turn_over();
 
-        static void process_mappings(Rotor*, std::vector<std::string>);
         static void compute_inverse(Rotor*);
 
         static Rotor create_rotor(std::string path);
@@ -25,7 +24,7 @@ class Rotor : public CipherMap {
 
         Rotor(int notch, int rotor, int ring, std::vector<std::string> mappings) : notch_pos(notch), rotor_pos(rotor), ring_setting(ring) { 
             //https://stackoverflow.com/a/445135/16034206 - passing 'this' to a static function inside constructor
-            process_mappings(this, mappings); 
+            CipherMap::process_mappings(this, mappings); 
             compute_inverse(this); 
         }
         ~Rotor() {}
