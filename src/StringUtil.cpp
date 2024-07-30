@@ -27,3 +27,27 @@ void StringUtil::split_into (std::vector<std::string>& vector, std::string input
     }
     vector.push_back(input.substr(start));
 }
+
+char StringUtil::int_to_char(int i) {
+    return static_cast<char>(i + 65);
+}
+
+int StringUtil::char_to_int(char c) {
+    return static_cast<int>(c) - 65;
+}
+
+char StringUtil::alphabet_to_int(char c) {
+    int i = char_to_int(c);
+    if (i < 0 || i > 25) {
+        throw std::invalid_argument("Invalid char: " + std::to_string(c) + ". Only accepts alphabets");
+    }
+    return i;
+}
+
+int StringUtil::int_to_alphabet(int i) {
+    char c = int_to_char(i);
+    if (c < 'A' || c > 'Z') {
+        throw std::invalid_argument("Invalid int: " + std::to_string(i) + ". Accepts 0 - 25");
+    }
+    return c;
+}
