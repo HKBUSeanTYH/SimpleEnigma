@@ -29,6 +29,8 @@ class Rotor : public CipherMap {
         ~Rotor() {}
 
         friend std::ostream& operator<<(std::ostream& o, Rotor const& a) {
+            o << "Positions:\n";
+            o << "Notch: " << a.notch_pos << " Rotor pos: " << a.rotor_pos << " Ring Setting: " << a.ring_setting << "\n";
             for (int i = 0; i < a.cipher_mapping.size(); ++i) {
                 o << StringUtil::int_to_char(i) << " ";
             }

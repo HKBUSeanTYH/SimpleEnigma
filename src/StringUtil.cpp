@@ -36,18 +36,16 @@ int StringUtil::char_to_int(char c) {
     return static_cast<int>(c) - 65;
 }
 
-char StringUtil::alphabet_to_int(char c) {
-    int i = char_to_int(c);
-    if (i < 0 || i > 25) {
-        throw std::invalid_argument("Invalid char: " + std::to_string(c) + ". Only accepts alphabets");
+int StringUtil::alphabet_to_int(char c) {
+    if (c < 'A' || c > 'Z') {
+        throw std::invalid_argument("Invalid int: " + std::to_string(c) + ". Accepts 0 - 25");
     }
-    return i;
+    return char_to_int(c);
 }
 
-int StringUtil::int_to_alphabet(int i) {
-    char c = int_to_char(i);
-    if (c < 'A' || c > 'Z') {
-        throw std::invalid_argument("Invalid int: " + std::to_string(i) + ". Accepts 0 - 25");
+char StringUtil::int_to_alphabet(int i) {
+    if (i < 0 || i > 25) {
+        throw std::invalid_argument("Invalid char: " + std::to_string(i) + ". Only accepts alphabets");
     }
-    return c;
+    return int_to_char(i);
 }
