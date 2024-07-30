@@ -11,11 +11,11 @@ class Reflector : public CipherMap {
 
         friend std::ostream& operator<<(std::ostream& o, Reflector const& a) {
             for (int i = 0; i < a.cipher_mapping.size(); ++i) {
-                o << int_to_char(i) << " ";
+                o << StringUtil::int_to_char(i) << " ";
             }
             o << "\n";
             for (int i = 0; i < a.cipher_mapping.size(); ++i) {
-                o << int_to_char(a.cipher_mapping[i]) << " ";
+                o << StringUtil::int_to_char(a.cipher_mapping[i]) << " ";
             }
             o << "\n";
             return o;

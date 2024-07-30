@@ -12,8 +12,8 @@ class Plugboard : public CipherMap{
             for (int idx = 0; idx < a.cipher_mapping.size(); ++idx) {
                 int map_val = a.cipher_mapping[idx];
                 if (map_val != idx) {
-                    char cIdx = int_to_char(idx);
-                    char cVal = int_to_char(map_val);
+                    char cIdx = StringUtil::int_to_char(idx);
+                    char cVal = StringUtil::int_to_char(map_val);
                     
                     o << cIdx << " is mapped to " << cVal << "\n";
                 }
