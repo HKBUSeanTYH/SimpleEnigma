@@ -16,5 +16,5 @@ int main() {
     Enigma receiver {one, two, three, ref};
     receiver.input_plugs("A:B B:A C:D D:C");
     std::cout << receiver;
-    std::cout << receiver.encipher(output);
+    std::cout << receiver.encipher(output) << std::endl;
 }
