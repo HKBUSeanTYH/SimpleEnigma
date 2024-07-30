@@ -24,5 +24,9 @@ class Enigma {
         Rotor left;
         Rotor centre;
         Rotor right;
+
+        bool is_alphabet(char);
+        char encipher_helper(char);
+        void rotate();
 };
 #endif
