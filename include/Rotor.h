@@ -14,6 +14,7 @@ class Rotor : public CipherMap {
         void set_rotor_pos(int);
         bool is_at_notch();
         void turn_over();
+        std::string get_mappings();
 
         static void compute_inverse(Rotor*);
 
@@ -31,14 +32,6 @@ class Rotor : public CipherMap {
         friend std::ostream& operator<<(std::ostream& o, Rotor const& a) {
             o << "Positions:\n";
             o << "Notch: " << a.notch_pos << " Rotor pos: " << a.rotor_pos << " Ring Setting: " << a.ring_setting << "\n";
-            for (int i = 0; i < a.cipher_mapping.size(); ++i) {
-                o << StringUtil::int_to_char(i) << " ";
-            }
-            o << "\n";
-            for (int i = 0; i < a.cipher_mapping.size(); ++i) {
-                o << StringUtil::int_to_char(a.cipher_mapping[i]) << " ";
-            }
-            o << "\n";
             return o;
         }
     protected:

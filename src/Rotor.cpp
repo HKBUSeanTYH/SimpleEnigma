@@ -24,6 +24,26 @@ void Rotor::turn_over() {
     this->rotor_pos = (this->rotor_pos + 1) % 26;
 }
 
+std::string Rotor::get_mappings() {
+    std::string out;
+    for (int i = 0; i < cipher_mapping.size(); ++i) {
+        out.append(StringUtil::int_to_char(i)+" ");
+    }
+    out.append("\n");
+    for (int i = 0; i < cipher_mapping.size(); ++i) {
+        out.append(StringUtil::int_to_char(cipher_mapping[i])+" ");
+    }
+    out.append("\n");
+    for (int i = 0; i < cipher_mapping.size(); ++i) {
+        out.append(StringUtil::int_to_char(i)+" ");
+    }
+    out.append("\n");
+    for (int i = 0; i < cipher_mapping.size(); ++i) {
+        out.append(StringUtil::int_to_char(inverse_mapping[i])+" ");
+    }
+    return out.append("\n");
+}
+
 /*
     TODO: look into move semantics. avoid unnecessary copies (even if copy elision may occur).
 */

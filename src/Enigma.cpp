@@ -7,9 +7,10 @@ void Enigma::input_plugs(std::string input) {
 }
 
 std::string Enigma::encipher(std::string input) {
+    std::transform(input.begin(), input.end(), input.begin(), [](auto c) { return std::toupper(c); });
     std::string output{};
     std::cout << input << "\n";
-    for (int i = 0; i < input.size(); i++) {
+    for (int i = 0; i < input.size(); ++i) {
         if (is_alphabet(input[i])) {
             char enciphered_char = encipher_helper(input[i]);
             output.push_back(enciphered_char);
@@ -21,22 +22,25 @@ std::string Enigma::encipher(std::string input) {
 }
 
 bool Enigma::is_alphabet(char c) {
-    return (c >= 'A' && c <= 'Z') || (c >= 'a' || c <= 'z');
+    return (c >= 'A' && c <= 'Z');
 }
 
 char Enigma::encipher_helper(char c) {
     rotate();
     int i {StringUtil::char_to_int(c)};
     i = plugboard.map(i);
+
     i = right.map(i);
     i = centre.map(i);
     i = left.map(i);
+
     i = reflector.map(i);
+
     i = left.inverse_map(i);
     i = centre.inverse_map(i);
     i = right.inverse_map(i);
-    char out {StringUtil::int_to_char(i)};
-    return out;
+    i = plugboard.map(i);
+    return StringUtil::int_to_char(i);
 }
 
 void Enigma::rotate() {
