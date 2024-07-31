@@ -7,14 +7,16 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # include(CTest)
 # enable_testing()
 
-include_directories(include)
-set(source_files src/CipherMap.cpp src/Enigma.cpp src/Main.cpp src/Plugboard.cpp src/Reflector.cpp src/Rotor.cpp src/StringUtil.cpp)
+include_directories(
+        ${PROJECT_SOURCE_DIR}/include
+        ${PROJECT_SOURCE_DIR}/src
+)
 
-# Loop through each source file
-foreach(source_file IN LISTS source_files)
-    # Get the name of the file without the extension (e.g. 'a' from src/a.cpp'
-    get_filename_component(target_name ${source_file} NAME_WE)
-    
-    # Create an executable with the above name, building the above source
-    add_executable("${target_name}" "${source_file}")
-endforeach()
+file(GLOB all_SRCS
+        "${PROJECT_SOURCE_DIR}/include/*.h"
+        "${PROJECT_SOURCE_DIR}/include/*.hpp"
+        "${PROJECT_SOURCE_DIR}/src/*.cpp"
+        "${PROJECT_SOURCE_DIR}/src/*.c"
+)
+
+add_executable(SimpleEnigma ${all_SRCS})
