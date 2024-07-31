@@ -19,4 +19,6 @@ file(GLOB all_SRCS
         "${PROJECT_SOURCE_DIR}/src/*.c"
 )
 
+file(COPY resources DESTINATION .)
+
 add_executable(SimpleEnigma ${all_SRCS})
