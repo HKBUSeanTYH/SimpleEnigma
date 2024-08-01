@@ -7,18 +7,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # include(CTest)
 # enable_testing()
 
-include_directories(
-        ${PROJECT_SOURCE_DIR}/include
-        ${PROJECT_SOURCE_DIR}/src
-)
+add_library(SimpleEnigma STATIC src/CipherMap.cpp src/Enigma.cpp src/Plugboard.cpp src/Reflector.cpp src/Rotor.cpp src/StringUtil.cpp)
+target_include_directories(SimpleEnigma PUBLIC include)
+target_compile_features(SimpleEnigma PUBLIC cxx_std_17)
 
-file(GLOB all_SRCS
-        "${PROJECT_SOURCE_DIR}/include/*.h"
-        "${PROJECT_SOURCE_DIR}/include/*.hpp"
-        "${PROJECT_SOURCE_DIR}/src/*.cpp"
-        "${PROJECT_SOURCE_DIR}/src/*.c"
-)
 
 file(COPY resources DESTINATION .)
 
-add_executable(SimpleEnigma ${all_SRCS})
+add_executable(main src/Main.cpp)
+target_link_libraries(main PUBLIC SimpleEnigma)
