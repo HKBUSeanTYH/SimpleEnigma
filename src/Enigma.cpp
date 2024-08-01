@@ -1,5 +1,7 @@
 #include "Enigma.h"
 
+Enigma::Enigma(Rotor one, Rotor two, Rotor three, Reflector ref) : reflector{ref}, left{one}, centre{two}, right{three}, plugboard() { }
+
 void Enigma::input_plugs(std::string input) {
     std::transform(input.begin(), input.end(), input.begin(), [](auto c) { return std::toupper(c); });
     std::vector<std::string> mappings = StringUtil::split(input, " ");
@@ -19,6 +21,11 @@ std::string Enigma::encipher(std::string input) {
         }
     }
     return output;
+}
+
+std::ostream& operator<<(std::ostream& o, Enigma const& a) {
+    o << "Plugboard:\n" << a.plugboard << "\nReflector:\n" <<  a.reflector << "\nRotors:\n" << a.left << "\n" << a.centre << "\n" << a.right << "\n";
+    return o;
 }
 
 bool Enigma::is_alphabet(char c) {

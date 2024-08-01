@@ -11,19 +11,16 @@
 class Enigma {
     public:
         //member initializer to init plugboard
-        Enigma(Rotor one, Rotor two, Rotor three, Reflector ref) : plugboard(), left{one}, centre{two}, right{three}, reflector{ref} { }
+        Enigma(Rotor, Rotor, Rotor, Reflector);
         void input_plugs(std::string);
         std::string encipher(std::string);
-        friend std::ostream& operator<<(std::ostream& o, Enigma const& a) {
-            o << "Plugboard:\n" << a.plugboard << "\nReflector:\n" <<  a.reflector << "\nRotors:\n" << a.left << "\n" << a.centre << "\n" << a.right << "\n";
-            return o;
-        }
+        friend std::ostream& operator<<(std::ostream&, Enigma const&);
     private:
         Reflector reflector;
-        Plugboard plugboard;
         Rotor left;
         Rotor centre;
         Rotor right;
+        Plugboard plugboard;
 
         bool is_alphabet(char);
         char encipher_helper(char);
