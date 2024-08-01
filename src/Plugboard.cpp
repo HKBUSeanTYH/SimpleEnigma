@@ -5,7 +5,7 @@ int Plugboard::map(int idx) {
 }
 
 void Plugboard::process_mappings(std::vector<std::string> mappings) {
-    CipherMap::process_mappings(this, mappings);
+    CipherMap::process_mappings(this->cipher_mapping, mappings);
 }
 
 std::ostream& operator<<(std::ostream& o, Plugboard const& a) {

@@ -1,13 +1,21 @@
 #include "CipherMap.h"
 
+CipherMap::CipherMap() : cipher_mapping{} {
+    default_wiring(cipher_mapping);
+}
+
+CipherMap::CipherMap(std::vector<std::string> mappings) {
+    default_wiring(this->cipher_mapping);
+    process_mappings(this->cipher_mapping, mappings);
+}
+
 void CipherMap::default_wiring(std::array<int, 26>& arrMapping) {
     for (int idx = 0; idx < arrMapping.size(); ++idx) {
         arrMapping[idx] = idx;
     }
 }
 
-void CipherMap::process_mappings(CipherMap* ciphermap, std::vector<std::string> mappings) {
-    std::array<int,26>& source = ciphermap->cipher_mapping;
+void CipherMap::process_mappings(std::array<int,26>& source, std::vector<std::string>& mappings) {
     std::vector<std::string> temp;
     for (auto& map : mappings) {
         StringUtil::split_into(temp, map, ":");
