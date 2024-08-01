@@ -5,20 +5,9 @@
 
 class Reflector : public CipherMap {
     public:
+        Reflector(const std::vector<std::string>&);
         int map(int) override;
-        Reflector(std::vector<std::string> mappings) : CipherMap{mappings} { }
-        static Reflector create_reflector(std::string path);
-
-        friend std::ostream& operator<<(std::ostream& o, Reflector const& a) {
-            for (int i = 0; i < a.cipher_mapping.size(); ++i) {
-                o << StringUtil::int_to_char(i) << " ";
-            }
-            o << "\n";
-            for (int i = 0; i < a.cipher_mapping.size(); ++i) {
-                o << StringUtil::int_to_char(a.cipher_mapping[i]) << " ";
-            }
-            o << "\n";
-            return o;
-        }
+        static Reflector create_reflector(const std::string& path);
+        friend std::ostream& operator<<(std::ostream&, Reflector const&);
 };
 #endif
