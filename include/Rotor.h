@@ -16,24 +16,14 @@ class Rotor : public CipherMap {
         void turn_over();
         std::string get_mappings();
 
-        static void compute_inverse(Rotor*);
+        static void compute_inverse(const std::array<int,26>&, std::array<int,26>&);
 
         static Rotor create_rotor(std::string path);
-        Rotor(int notch = 0) : notch_pos(notch), rotor_pos(0), ring_setting(0) {
-            compute_inverse(this); 
-        }
-
-        Rotor(int notch, int rotor, int ring, std::vector<std::string> mappings) : notch_pos(notch), rotor_pos(rotor), ring_setting(ring), CipherMap{mappings} { 
-            //https://stackoverflow.com/a/445135/16034206 - passing 'this' to a static function inside constructor
-            compute_inverse(this); 
-        }
+        Rotor(int);
+        Rotor(int, int, int, std::vector<std::string>&);
         ~Rotor() {}
 
-        friend std::ostream& operator<<(std::ostream& o, Rotor const& a) {
-            o << "Positions:\n";
-            o << "Notch: " << a.notch_pos << " Rotor pos: " << a.rotor_pos << " Ring Setting: " << a.ring_setting << "\n";
-            return o;
-        }
+        friend std::ostream& operator<<(std::ostream&, Rotor const&);
     protected:
         const int notch_pos;
         int ring_setting;

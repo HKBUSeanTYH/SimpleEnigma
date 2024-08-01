@@ -4,7 +4,7 @@ CipherMap::CipherMap() : cipher_mapping{} {
     default_wiring(cipher_mapping);
 }
 
-CipherMap::CipherMap(std::vector<std::string> mappings) {
+CipherMap::CipherMap(const std::vector<std::string>& mappings) {
     default_wiring(this->cipher_mapping);
     process_mappings(this->cipher_mapping, mappings);
 }
@@ -15,7 +15,7 @@ void CipherMap::default_wiring(std::array<int, 26>& arrMapping) {
     }
 }
 
-void CipherMap::process_mappings(std::array<int,26>& source, std::vector<std::string>& mappings) {
+void CipherMap::process_mappings(std::array<int,26>& source, const std::vector<std::string>& mappings) {
     std::vector<std::string> temp;
     for (auto& map : mappings) {
         StringUtil::split_into(temp, map, ":");

@@ -66,6 +66,21 @@ Rotor Rotor::create_rotor(std::string filePath) {
     return (mappings.size() == 26) ? Rotor{notch_pos, 0, 0, mappings} : throw std::invalid_argument("Not enough mappings in Rotor file: "+filePath);
 }
 
+Rotor::Rotor(int notch) : notch_pos(notch), rotor_pos(0), ring_setting(0) {
+    compute_inverse(this->cipher_mapping, this->inverse_mapping); 
+}
+
+Rotor::Rotor(int notch, int rotor, int ring, std::vector<std::string>& mappings) : notch_pos(notch), rotor_pos(rotor), ring_setting(ring), CipherMap{mappings} { 
+    //https://stackoverflow.com/a/445135/16034206 - passing 'this' to a static function inside constructor
+    compute_inverse(this->cipher_mapping, this->inverse_mapping); 
+}
+
+std::ostream& operator<<(std::ostream& o, Rotor const& a) {
+    o << "Positions:\n";
+    o << "Notch: " << a.notch_pos << " Rotor pos: " << a.rotor_pos << " Ring Setting: " << a.ring_setting << "\n";
+    return o;
+}
+
 int Rotor::encipher(int input, int rotor_pos, int ring_setting, std::array<int,26>& mapping) {
     int shift {rotor_pos - ring_setting};
     /*
@@ -82,9 +97,7 @@ int Rotor::encipher(int input, int rotor_pos, int ring_setting, std::array<int,2
     // add another 26 to prevent negatives
 }
 
-void Rotor::compute_inverse(Rotor* rotor) {
-    std::array<int,26>& source = rotor->cipher_mapping;
-    std::array<int,26>& dest = rotor->inverse_mapping;
+void Rotor::compute_inverse(const std::array<int,26>& source, std::array<int,26>& dest) {
     for (int i = 0; i < source.size(); ++i) {
         dest[source[i]] = i; //get the value at index i of source array, treat it as index of inverse, and place source index as value
     }
