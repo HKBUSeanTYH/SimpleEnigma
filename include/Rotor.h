@@ -17,17 +17,15 @@ class Rotor : public CipherMap {
         std::string get_mappings();
 
         static void compute_inverse(const std::array<int,26>&, std::array<int,26>&);
-
         static Rotor create_rotor(std::string path);
-        Rotor(int);
-        Rotor(int, int, int, std::vector<std::string>&);
-        ~Rotor() {}
-
         friend std::ostream& operator<<(std::ostream&, Rotor const&);
-    protected:
-        const int notch_pos;
+    private:
+        int notch_pos;
         int ring_setting;
         int rotor_pos;
+
+        Rotor() = delete;
+        Rotor(int, int, int, std::vector<std::string>&);
 
         int encipher(int, int, int, std::array<int,26>&);
         std::array<int, 26> inverse_mapping;

@@ -66,10 +66,6 @@ Rotor Rotor::create_rotor(std::string filePath) {
     return (mappings.size() == 26) ? Rotor{notch_pos, 0, 0, mappings} : throw std::invalid_argument("Not enough mappings in Rotor file: "+filePath);
 }
 
-Rotor::Rotor(int notch) : notch_pos(notch), rotor_pos(0), ring_setting(0) {
-    compute_inverse(this->cipher_mapping, this->inverse_mapping); 
-}
-
 Rotor::Rotor(int notch, int rotor, int ring, std::vector<std::string>& mappings) : notch_pos(notch), rotor_pos(rotor), ring_setting(ring), CipherMap{mappings} { 
     //https://stackoverflow.com/a/445135/16034206 - passing 'this' to a static function inside constructor
     compute_inverse(this->cipher_mapping, this->inverse_mapping); 
