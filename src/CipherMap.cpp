@@ -4,7 +4,7 @@ CipherMap::CipherMap() : cipher_mapping{} {
     default_wiring(cipher_mapping);
 }
 
-CipherMap::CipherMap(const std::vector<std::string>& mappings) {
+CipherMap::CipherMap(const std::vector<std::string>& mappings) : cipher_mapping{} {
     default_wiring(this->cipher_mapping);
     process_mappings(this->cipher_mapping, mappings);
 }
