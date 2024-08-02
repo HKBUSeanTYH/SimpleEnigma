@@ -47,23 +47,26 @@ std::string Rotor::get_mappings() {
 /*
     TODO: look into move semantics. avoid unnecessary copies (even if copy elision may occur).
 */
-Rotor Rotor::create_rotor(std::string filePath) {
-    std::ifstream inFile(filePath);
+Rotor Rotor::create_rotor(std::string file_path) {
+    if (!std::filesystem::exists(file_path)) {
+        throw std::invalid_argument("File ("+file_path+") does not exist.");
+    }
+    std::ifstream inFile(file_path);
     std::string line;
     int notch_pos;
     //read notch
     if (std::getline(inFile, line)) {
         notch_pos = std::stoi(line);
     } else {
-        throw std::invalid_argument("Unable to get notch position");
+        throw std::runtime_error("Unable to get notch position");
     }
     if (std::getline(inFile, line)) {
         std::transform(line.begin(), line.end(), line.begin(), [](auto c) { return std::toupper(c); });
     } else {
-        throw std::invalid_argument("Unable to get mappings");
+        throw std::runtime_error("Unable to get mappings");
     }
     std::vector<std::string> mappings = StringUtil::split(line, " ");
-    return (mappings.size() == 26) ? Rotor{notch_pos, 0, 0, mappings} : throw std::invalid_argument("Not enough mappings in Rotor file: "+filePath);
+    return (mappings.size() == 26) ? Rotor{notch_pos, 0, 0, mappings} : throw std::runtime_error("Not enough mappings in Rotor file: "+file_path);
 }
 
 Rotor::Rotor(int notch, int rotor, int ring, std::vector<std::string>& mappings) : notch_pos(notch), rotor_pos(rotor), ring_setting(ring), CipherMap{mappings} { 

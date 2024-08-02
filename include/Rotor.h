@@ -2,6 +2,7 @@
 #define ROTOR_DEF
 #include <iostream>
 #include <fstream>
+#include <filesystem>
 #include "CipherMap.h"
 #include "StringUtil.h"
 
