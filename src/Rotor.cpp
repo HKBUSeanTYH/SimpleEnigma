@@ -80,24 +80,26 @@ std::ostream& operator<<(std::ostream& o, Rotor const& a) {
     return o;
 }
 
-int Rotor::encipher(int input, int rotor_pos, int ring_setting, std::array<int,26>& mapping) {
-    int shift {rotor_pos - ring_setting};
-    /*
-        ring setting shifts characters N steps forward. With Ring setting B, and Rotor 1
-        Z is treated as A
-        A is treated as B
-        etc ...
-
-        an input of A will go through Z wiring (Z treated as A), Z mapped to J and shifted to K
-    */
-    return (mapping[(input + shift + 26) % 26] - shift + 26) % 26;
-    // input + shift could be negative, so add 26
-    // shift needs to be performed both on input and output
-    // add another 26 to prevent negatives
-}
-
 void Rotor::compute_inverse(const std::array<int,26>& source, std::array<int,26>& dest) {
     for (int i = 0; i < source.size(); ++i) {
         dest[source[i]] = i; //get the value at index i of source array, treat it as index of inverse, and place source index as value
+    }
+}
+
+namespace {
+    int encipher(int input, int rotor_pos, int ring_setting, std::array<int,26>& mapping) {
+        int shift {rotor_pos - ring_setting};
+        /*
+            ring setting shifts characters N steps forward. With Ring setting B, and Rotor 1
+            Z is treated as A
+            A is treated as B
+            etc ...
+
+            an input of A will go through Z wiring (Z treated as A), Z mapped to J and shifted to K
+        */
+        return (mapping[(input + shift + 26) % 26] - shift + 26) % 26;
+        // input + shift could be negative, so add 26
+        // shift needs to be performed both on input and output
+        // add another 26 to prevent negatives
     }
 }

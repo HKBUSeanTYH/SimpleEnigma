@@ -28,7 +28,6 @@ class Rotor : public CipherMap {
         Rotor() = delete;
         Rotor(int, int, int, std::vector<std::string>&);
 
-        int encipher(int, int, int, std::array<int,26>&);
         std::array<int, 26> inverse_mapping;
 };
 #endif
