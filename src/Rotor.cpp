@@ -58,19 +58,23 @@ void Rotor::turn_over() {
 std::string Rotor::get_mappings() {
     std::string out;
     for (int i = 0; i < cipher_mapping.size(); ++i) {
-        out.append(StringUtil::int_to_char(i)+" ");
+        out.push_back(StringUtil::int_to_char(i));
+        out.push_back(' ');
     }
     out.append("\n");
     for (int i = 0; i < cipher_mapping.size(); ++i) {
-        out.append(StringUtil::int_to_char(cipher_mapping[i])+" ");
+        out.push_back(StringUtil::int_to_char(cipher_mapping[i]));
+        out.push_back(' ');
     }
     out.append("\n");
     for (int i = 0; i < cipher_mapping.size(); ++i) {
-        out.append(StringUtil::int_to_char(i)+" ");
+        out.push_back(StringUtil::int_to_char(i));
+        out.push_back(' ');
     }
     out.append("\n");
     for (int i = 0; i < cipher_mapping.size(); ++i) {
-        out.append(StringUtil::int_to_char(inverse_mapping[i])+" ");
+        out.push_back(StringUtil::int_to_char(inverse_mapping[i]));
+        out.push_back(' ');
     }
     return out.append("\n");
 }
