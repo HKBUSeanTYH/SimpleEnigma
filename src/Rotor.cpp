@@ -1,5 +1,36 @@
 #include "Rotor.h"
 
+//limit linkage to inside translation unit only
+//allows compiler to optimize more aggressively + make linking simpler
+namespace {
+    void compute_inverse(const std::array<int,26>& source, std::array<int,26>& dest) {
+        for (int i = 0; i < source.size(); ++i) {
+            dest[source[i]] = i; //get the value at index i of source array, treat it as index of inverse, and place source index as value
+        }
+    }
+
+    int encipher(int input, int rotor_pos, int ring_setting, std::array<int,26>& mapping) {
+        int shift {rotor_pos - ring_setting};
+        /*
+            ring setting shifts characters N steps forward. With Ring setting B, and Rotor 1
+            Z is treated as A
+            A is treated as B
+            etc ...
+
+            an input of A will go through Z wiring (Z treated as A), Z mapped to J and shifted to K
+        */
+        return (mapping[(input + shift + 26) % 26] - shift + 26) % 26;
+        // input + shift could be negative, so add 26
+        // shift needs to be performed both on input and output
+        // add another 26 to prevent negatives
+    }
+}
+
+Rotor::Rotor(int notch, int rotor, int ring, std::vector<std::string>& mappings) : notch_pos(notch), rotor_pos(rotor), ring_setting(ring), CipherMap{mappings} { 
+    //https://stackoverflow.com/a/445135/16034206 - passing 'this' to a static function inside constructor
+    compute_inverse(this->cipher_mapping, this->inverse_mapping); 
+}
+
 int Rotor::map(int input) {
     return encipher(input, this->rotor_pos, this->ring_setting, this->cipher_mapping);
 }
@@ -69,37 +100,8 @@ Rotor Rotor::create_rotor(std::string file_path) {
     return (mappings.size() == 26) ? Rotor{notch_pos, 0, 0, mappings} : throw std::runtime_error("Not enough mappings in Rotor file: "+file_path);
 }
 
-Rotor::Rotor(int notch, int rotor, int ring, std::vector<std::string>& mappings) : notch_pos(notch), rotor_pos(rotor), ring_setting(ring), CipherMap{mappings} { 
-    //https://stackoverflow.com/a/445135/16034206 - passing 'this' to a static function inside constructor
-    compute_inverse(this->cipher_mapping, this->inverse_mapping); 
-}
-
 std::ostream& operator<<(std::ostream& o, Rotor const& a) {
     o << "Positions:\n";
     o << "Notch: " << a.notch_pos << " Rotor pos: " << a.rotor_pos << " Ring Setting: " << a.ring_setting << "\n";
     return o;
-}
-
-void Rotor::compute_inverse(const std::array<int,26>& source, std::array<int,26>& dest) {
-    for (int i = 0; i < source.size(); ++i) {
-        dest[source[i]] = i; //get the value at index i of source array, treat it as index of inverse, and place source index as value
-    }
-}
-
-namespace {
-    int encipher(int input, int rotor_pos, int ring_setting, std::array<int,26>& mapping) {
-        int shift {rotor_pos - ring_setting};
-        /*
-            ring setting shifts characters N steps forward. With Ring setting B, and Rotor 1
-            Z is treated as A
-            A is treated as B
-            etc ...
-
-            an input of A will go through Z wiring (Z treated as A), Z mapped to J and shifted to K
-        */
-        return (mapping[(input + shift + 26) % 26] - shift + 26) % 26;
-        // input + shift could be negative, so add 26
-        // shift needs to be performed both on input and output
-        // add another 26 to prevent negatives
-    }
 }

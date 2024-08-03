@@ -7,6 +7,15 @@
 #include "StringUtil.h"
 
 class Rotor : public CipherMap {
+    private:
+        int notch_pos;
+        int ring_setting;
+        int rotor_pos;
+
+        Rotor() = delete;
+        Rotor(int, int, int, std::vector<std::string>&);
+
+        std::array<int, 26> inverse_mapping;
     public:
         int map(int) override;
         int inverse_map(int);
@@ -17,17 +26,8 @@ class Rotor : public CipherMap {
         void turn_over();
         std::string get_mappings();
 
-        static void compute_inverse(const std::array<int,26>&, std::array<int,26>&);
+        // static void compute_inverse(const std::array<int,26>&, std::array<int,26>&);
         static Rotor create_rotor(std::string path);
         friend std::ostream& operator<<(std::ostream&, Rotor const&);
-    private:
-        int notch_pos;
-        int ring_setting;
-        int rotor_pos;
-
-        Rotor() = delete;
-        Rotor(int, int, int, std::vector<std::string>&);
-
-        std::array<int, 26> inverse_mapping;
 };
 #endif
