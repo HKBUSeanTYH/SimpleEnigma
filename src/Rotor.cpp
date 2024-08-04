@@ -9,7 +9,7 @@ namespace {
         }
     }
 
-    int encipher(int input, int rotor_pos, int ring_setting, std::array<int,26>& mapping) {
+    int encipher(int input, int rotor_pos, int ring_setting, CipherMap& mapping) {
         int shift {rotor_pos - ring_setting};
         /*
             ring setting shifts characters N steps forward. With Ring setting B, and Rotor 1
@@ -18,21 +18,29 @@ namespace {
             etc ...
 
             an input of A will go through Z wiring (Z treated as A), Z mapped to J and shifted to K
+
+            rotor 1 in Ring setting A:
+            A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 
+        --> E K M F L G D Q V Z N T O W Y H X U S P A I B R C J (the inner wiring is shifted forward)
+
+            rotor 1 in Ring setting B:
+            A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 
+        --> J E K M F L G D Q V Z N T O W Y H X U S P A I B R C (wiring wraps around)
         */
-        return (mapping[(input + shift + 26) % 26] - shift + 26) % 26;
+        return (mapping.map((input + shift + 26) % 26) - shift + 26) % 26;
         // input + shift could be negative, so add 26
         // shift needs to be performed both on input and output
         // add another 26 to prevent negatives
     }
 }
 
-Rotor::Rotor(int notch, int rotor, int ring, std::vector<std::string>& mappings) : notch_pos(notch), rotor_pos(rotor), ring_setting(ring), CipherMap{mappings} { 
-    //https://stackoverflow.com/a/445135/16034206 - passing 'this' to a static function inside constructor
-    compute_inverse(this->cipher_mapping, this->inverse_mapping); 
+Rotor::Rotor(int notch, int rotor, int ring, std::vector<std::string>& mappings) : notch_pos(notch), rotor_pos(rotor), ring_setting(ring), regular_mapping{mappings, false}, inverse_mapping{mappings, true} { 
+    // //https://stackoverflow.com/a/445135/16034206 - passing 'this' to a static function inside constructor
+    // compute_inverse(this->cipher_mapping, this->inverse_mapping); 
 }
 
 int Rotor::map(int input) {
-    return encipher(input, this->rotor_pos, this->ring_setting, this->cipher_mapping);
+    return encipher(input, this->rotor_pos, this->ring_setting, this->regular_mapping);
 }
 
 int Rotor::inverse_map(int input) {
@@ -53,30 +61,6 @@ bool Rotor::is_at_notch() {
 
 void Rotor::turn_over() {
     this->rotor_pos = (this->rotor_pos + 1) % 26;
-}
-
-std::string Rotor::get_mappings() {
-    std::string out;
-    for (int i = 0; i < cipher_mapping.size(); ++i) {
-        out.push_back(StringUtil::int_to_char(i));
-        out.push_back(' ');
-    }
-    out.append("\n");
-    for (int i = 0; i < cipher_mapping.size(); ++i) {
-        out.push_back(StringUtil::int_to_char(cipher_mapping[i]));
-        out.push_back(' ');
-    }
-    out.append("\n");
-    for (int i = 0; i < cipher_mapping.size(); ++i) {
-        out.push_back(StringUtil::int_to_char(i));
-        out.push_back(' ');
-    }
-    out.append("\n");
-    for (int i = 0; i < cipher_mapping.size(); ++i) {
-        out.push_back(StringUtil::int_to_char(inverse_mapping[i]));
-        out.push_back(' ');
-    }
-    return out.append("\n");
 }
 
 /*
@@ -107,5 +91,6 @@ Rotor Rotor::create_rotor(std::string file_path) {
 std::ostream& operator<<(std::ostream& o, Rotor const& a) {
     o << "Positions:\n";
     o << "Notch: " << a.notch_pos << " Rotor pos: " << a.rotor_pos << " Ring Setting: " << a.ring_setting << "\n";
+    o << a.regular_mapping;
     return o;
 }

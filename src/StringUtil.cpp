@@ -3,7 +3,7 @@
 /*
     TODO: look into move semantics. avoid unnecessary copies (even if copy elision may occur).
 */
-std::vector<std::string> StringUtil::split (std::string input, std::string delimiter) {
+std::vector<std::string> StringUtil::split (const std::string& input, const std::string& delimiter) {
     std::vector<std::string> output;
     size_t start {0}, end {0}, delim_len {delimiter.size()};
     std::string token;
@@ -16,7 +16,7 @@ std::vector<std::string> StringUtil::split (std::string input, std::string delim
     return output;
 }
 
-void StringUtil::split_into (std::vector<std::string>& vector, std::string input, std::string delimiter) {
+void StringUtil::split_into (std::vector<std::string>& vector, const std::string& input, const std::string& delimiter) {
     vector.clear();
     size_t start {0}, end {0}, delim_len {delimiter.size()};
     std::string token;

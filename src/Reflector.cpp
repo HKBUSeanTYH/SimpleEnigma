@@ -1,9 +1,9 @@
 #include "Reflector.h"
 
-Reflector::Reflector(const std::vector<std::string>& mappings) : CipherMap{mappings} { }
+Reflector::Reflector(const std::vector<std::string>& mappings) : regular_mapping{mappings, false} { }
 
 int Reflector::map(int input) {
-    return this->cipher_mapping[input];
+    return this->regular_mapping.map(input);
 }
 
 Reflector Reflector::create_reflector(const std::string& filePath) {
@@ -22,13 +22,6 @@ Reflector Reflector::create_reflector(const std::string& filePath) {
 }
 
 std::ostream& operator<<(std::ostream& o, Reflector const& a) {
-    for (int i = 0; i < a.cipher_mapping.size(); ++i) {
-        o << StringUtil::int_to_char(i) << " ";
-    }
-    o << "\n";
-    for (int i = 0; i < a.cipher_mapping.size(); ++i) {
-        o << StringUtil::int_to_char(a.cipher_mapping[i]) << " ";
-    }
-    o << "\n";
+    o << a.regular_mapping;
     return o;
 }

@@ -7,18 +7,15 @@
 #include "StringUtil.h"
 
 class CipherMap {
-    protected:
-        //optionally convert an input to its plugged equivalent
-        virtual int map(int) = 0;
-        // virtual ~CipherMap() {}
-
+    public:
         CipherMap();
-        CipherMap(const std::vector<std::string>&);
-        
-        std::array<int, 26> cipher_mapping;
+        CipherMap(const std::vector<std::string>&, const bool&);
 
-        //init to setup default indices of plugboard
-        static void default_wiring(std::array<int, 26>&);
-        static void process_mappings(std::array<int,26>&, const std::vector<std::string>&);
+        //optionally convert an input to its plugged equivalent
+        int map(int);
+        void process_mappings(const std::vector<std::string>&, const bool&);
+        friend std::ostream& operator<<(std::ostream&, CipherMap const&);
+    private:
+        std::array<int, 26> cipher_mapping;
 };
 #endif
