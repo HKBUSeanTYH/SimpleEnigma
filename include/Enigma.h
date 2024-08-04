@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cctype>
 #include "Plugboard.h"
 #include "Rotor.h"
 #include "Reflector.h"

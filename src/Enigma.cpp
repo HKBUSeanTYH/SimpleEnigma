@@ -30,7 +30,7 @@ std::ostream& operator<<(std::ostream& o, Enigma const& a) {
 }
 
 bool Enigma::is_alphabet(char c) {
-    return (c >= 'A' && c <= 'Z');
+    return std::isalpha(c);
 }
 
 char Enigma::encipher_helper(char c) {
