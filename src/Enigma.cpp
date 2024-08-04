@@ -11,7 +11,7 @@ void Enigma::input_plugs(std::string input) {
 std::string Enigma::encipher(std::string input) {
     std::transform(input.begin(), input.end(), input.begin(), [](auto c) { return std::toupper(c); });
     std::string output{};
-    std::cout << input << "\n";
+    std::cout << "Input: " << input << "\n";
     for (int i = 0; i < input.size(); ++i) {
         if (is_alphabet(input[i])) {
             char enciphered_char = encipher_helper(input[i]);
@@ -20,6 +20,7 @@ std::string Enigma::encipher(std::string input) {
             output.push_back(input[i]);
         }
     }
+    std::cout << "Output: " << output << "\n\n";
     return output;
 }
 

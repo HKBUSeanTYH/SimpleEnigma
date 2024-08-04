@@ -22,6 +22,6 @@ Reflector Reflector::create_reflector(const std::string& filePath) {
 }
 
 std::ostream& operator<<(std::ostream& o, Reflector const& a) {
-    o << a.regular_mapping << "\n";
+    o << a.regular_mapping;
     return o;
 }

@@ -9,6 +9,6 @@ void Plugboard::process_mappings(const std::vector<std::string>& mappings) {
 }
 
 std::ostream& operator<<(std::ostream& o, Plugboard const& a) {
-    o << a.regular_mapping << "\n";
+    o << a.regular_mapping;
     return o;
 }

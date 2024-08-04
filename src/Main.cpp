@@ -10,13 +10,11 @@ int main() {
     enigma.input_plugs("A:B B:A C:D D:C");
     std::cout << enigma;
     std::string output {enigma.encipher("Hello World")};
-    std::cout << output << "\n\n";
 
     Enigma receiver {one, two, three, ref};
     receiver.input_plugs("A:B B:A C:D D:C");
     std::cout << receiver;
-    std::cout << receiver.encipher(output) << std::endl;
-
+    receiver.encipher(output);
 
     //showing effect of ring settings on encipher
     one.set_ring_setting(2);
@@ -27,10 +25,9 @@ int main() {
     enigma2.input_plugs("A:B B:A C:D D:C");
     std::cout << enigma2;
     std::string output2 {enigma2.encipher("Hello World")};
-    std::cout << output2 << "\n\n";
 
     Enigma receiver2 {one, two, three, ref};
     receiver2.input_plugs("A:B B:A C:D D:C");
     std::cout << receiver2;
-    std::cout << receiver2.encipher(output2) << std::endl;
+    receiver2.encipher(output2);
 }
