@@ -18,6 +18,14 @@ namespace {
             etc ...
 
             an input of A will go through Z wiring (Z treated as A), Z mapped to J and shifted to K
+
+            rotor 1 in Ring setting A:
+            A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 
+        --> E K M F L G D Q V Z N T O W Y H X U S P A I B R C J (the inner wiring is shifted forward)
+
+            rotor 1 in Ring setting B:
+            A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 
+        --> J E K M F L G D Q V Z N T O W Y H X U S P A I B R C (wiring wraps around)
         */
         return (mapping.map((input + shift + 26) % 26) - shift + 26) % 26;
         // input + shift could be negative, so add 26
@@ -83,5 +91,6 @@ Rotor Rotor::create_rotor(std::string file_path) {
 std::ostream& operator<<(std::ostream& o, Rotor const& a) {
     o << "Positions:\n";
     o << "Notch: " << a.notch_pos << " Rotor pos: " << a.rotor_pos << " Ring Setting: " << a.ring_setting << "\n";
+    o << a.regular_mapping;
     return o;
 }
