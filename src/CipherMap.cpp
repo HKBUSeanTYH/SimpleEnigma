@@ -7,33 +7,15 @@ namespace {
             arrMapping[idx] = idx;
         }
     }
-
-    void init_mappings(std::array<int,26>& source, const std::vector<std::string>& mappings, const bool& is_inverse) {
-        std::vector<std::string> temp;
-        for (auto& map : mappings) {
-            StringUtil::split_into(temp, map, ":");
-            if (temp[0].length() == 1 && temp[1].length() == 1) {
-                int left {StringUtil::alphabet_to_int(temp[0][0])};
-                int right {StringUtil::alphabet_to_int(temp[1][0])};
-                if (is_inverse) {
-                    source[right] = left;
-                } else {
-                    source[left] = right;
-                }
-            } else {
-                std::cout << "Invalid mapping: " << temp[0] << " to " << temp[1] <<"\n";
-            }        
-        }
-    }
 }
 
 CipherMap::CipherMap() : cipher_mapping{} {
-    default_wiring(cipher_mapping);
+    default_wiring(this->cipher_mapping);
 }
 
 CipherMap::CipherMap(const std::vector<std::string>& mappings, const bool& is_inverse) : cipher_mapping{} {
     default_wiring(this->cipher_mapping);
-    init_mappings(this->cipher_mapping, mappings, is_inverse);
+    process_mappings(mappings, is_inverse);
 }
 
 int CipherMap::map(int idx) {

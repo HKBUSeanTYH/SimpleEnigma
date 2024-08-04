@@ -3,12 +3,6 @@
 //limit linkage to inside translation unit only
 //allows compiler to optimize more aggressively + make linking simpler
 namespace {
-    void compute_inverse(const std::array<int,26>& source, std::array<int,26>& dest) {
-        for (int i = 0; i < source.size(); ++i) {
-            dest[source[i]] = i; //get the value at index i of source array, treat it as index of inverse, and place source index as value
-        }
-    }
-
     int encipher(int input, int rotor_pos, int ring_setting, CipherMap& mapping) {
         int shift {rotor_pos - ring_setting};
         /*
@@ -36,7 +30,6 @@ namespace {
 
 Rotor::Rotor(int notch, int rotor, int ring, std::vector<std::string>& mappings) : notch_pos(notch), rotor_pos(rotor), ring_setting(ring), regular_mapping{mappings, false}, inverse_mapping{mappings, true} { 
     // //https://stackoverflow.com/a/445135/16034206 - passing 'this' to a static function inside constructor
-    // compute_inverse(this->cipher_mapping, this->inverse_mapping); 
 }
 
 int Rotor::map(int input) {
