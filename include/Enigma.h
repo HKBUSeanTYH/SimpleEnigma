@@ -23,7 +23,6 @@ class Enigma {
         Rotor right;
         Plugboard plugboard;
 
-        bool is_alphabet(char);
         char encipher_helper(char);
         void rotate();
 };

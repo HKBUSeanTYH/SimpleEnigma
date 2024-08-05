@@ -13,7 +13,7 @@ std::string Enigma::encipher(std::string input) {
     std::string output{};
     std::cout << "Input: " << input << "\n";
     for (int i = 0; i < input.size(); ++i) {
-        if (is_alphabet(input[i])) {
+        if (std::isalpha(input[i])) {
             char enciphered_char = encipher_helper(input[i]);
             output.push_back(enciphered_char);
         } else {
@@ -27,10 +27,6 @@ std::string Enigma::encipher(std::string input) {
 std::ostream& operator<<(std::ostream& o, Enigma const& a) {
     o << "Plugboard:\n" << a.plugboard << "\nReflector:\n" <<  a.reflector << "\nRotors:\n" << a.left << "\n" << a.centre << "\n" << a.right << "\n";
     return o;
-}
-
-bool Enigma::is_alphabet(char c) {
-    return std::isalpha(c);
 }
 
 char Enigma::encipher_helper(char c) {
