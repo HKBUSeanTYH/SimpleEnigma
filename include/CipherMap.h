@@ -4,6 +4,8 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <numeric>
+#include <ranges>
 #include "StringUtil.h"
 
 class CipherMap {

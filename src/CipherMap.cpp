@@ -3,9 +3,7 @@
 namespace {
     //init to setup default indices of plugboard
     void default_wiring(std::array<int, 26>& arrMapping) {
-        for (int idx = 0; idx < arrMapping.size(); ++idx) {
-            arrMapping[idx] = idx;
-        }
+        std::iota(begin(arrMapping), end(arrMapping), 0);
     }
 }
 
@@ -45,9 +43,9 @@ std::ostream& operator<<(std::ostream& o, CipherMap const& a) {
         o << StringUtil::int_to_char(i) << " ";
     }
     o << "\n";
-    for (int i = 0; i < a.cipher_mapping.size(); ++i) {
-        o << StringUtil::int_to_char(a.cipher_mapping[i]) << " ";
-    }
+    std::for_each(begin(a.cipher_mapping), end(a.cipher_mapping), [&o](int i){
+        o << StringUtil::int_to_char(i) << " ";
+    });
     o << "\n";
     return o;
 }
