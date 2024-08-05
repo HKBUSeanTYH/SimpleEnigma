@@ -39,9 +39,9 @@ void CipherMap::process_mappings(const std::vector<std::string>& mappings, const
 }
 
 std::ostream& operator<<(std::ostream& o, CipherMap const& a) {
-    for (int i = 0; i < a.cipher_mapping.size(); ++i) {
+    std::ranges::for_each(std::views::iota(0u, a.cipher_mapping.size()), [&o](int i){
         o << StringUtil::int_to_char(i) << " ";
-    }
+    });
     o << "\n";
     std::for_each(begin(a.cipher_mapping), end(a.cipher_mapping), [&o](int i){
         o << StringUtil::int_to_char(i) << " ";
