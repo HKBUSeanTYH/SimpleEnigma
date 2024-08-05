@@ -38,14 +38,14 @@ int StringUtil::char_to_int(char c) {
 
 int StringUtil::alphabet_to_int(char c) {
     if (c < 'A' || c > 'Z') {
-        throw std::invalid_argument("Invalid int: " + std::to_string(c) + ". Accepts 0 - 25");
+        throw std::invalid_argument("Invalid char: " + std::to_string(c) + ". Only accepts alphabets");
     }
     return char_to_int(c);
 }
 
 char StringUtil::int_to_alphabet(int i) {
     if (i < 0 || i > 25) {
-        throw std::invalid_argument("Invalid char: " + std::to_string(i) + ". Only accepts alphabets");
+        throw std::invalid_argument("Invalid int: " + std::to_string(i) + ". Accepts 0 - 25");
     }
     return int_to_char(i);
 }
