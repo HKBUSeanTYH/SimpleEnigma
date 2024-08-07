@@ -12,7 +12,6 @@ class Rotor {
         int ring_setting;
         int rotor_pos;
 
-        Rotor() = delete;
         Rotor(int, int, int, std::vector<std::string>&);
 
         CipherMap inverse_mapping;
